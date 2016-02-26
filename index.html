@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta charset="utf-8">
+	<title>Upload Images</title>
+</head>
+<body>
+
+	<h1>Images Upload</h1>
+
+	<form id="uploadForm" enctype="multipart/form-data" action = "/photo" method = "post">
+		<input type="file" name="userPhoto" multiple />
+		<input type="submit" value="Upload Image" name="submit">
+	</form>
+
+	<form method = "post" action = "/optimize">
+		<input type="submit" value="Optimize">
+	</form>
+
+	<form method = "post" action = "/zip">
+		<input type="submit" value="Zip">
+	</form>
+
+	<form method = "post" action = "/download">
+		<input type="submit" value="Download">
+	</form>
+</body>
+</html>
