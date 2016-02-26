@@ -18,7 +18,7 @@ var storage =  multer.diskStorage({
 	}
 });
 
-//We will need to storage and in HTMl we will send an array
+//We will need to storage and in HTMl we will send an array (array('userPhoto') => Search userPhoto in html)
 var upload = multer({ storage : storage}).array('userPhoto');
 
 var app = express();
@@ -39,6 +39,7 @@ app.get('/ui',function(req,res){
     res.sendFile(__dirname + "/ui/index.html");
 });
 
+//Gets the croped image and returns the png
 app.post('/getImage', function (req, res) {
 	var data = req.body.image,
 		base64Data,
@@ -67,44 +68,39 @@ app.post('/photo',function(req,res){
 
 app.post('/optimize', function (req, res) {
  //Image optimization
+	var file = fs.readdirSync('./uploads/', {});
+	var i=0;
 	new Imagemin()
 		.src('./uploads/*.{gif,jpg,png,svg}')
 		.dest('./uploads/')
 		.use(Imagemin.jpegtran({progressive: true}))
 		.run(function (err, files) {
-			console.log(files[0]);
-			// => {path: 'build/images/foo.jpg', contents: <Buffer 89 50 4e ...>}
+			if(files.length == file.length) {
+
+
+				//Loop trough each file
+				file.forEach( function(file, index) {
+					//Just....
+					if(file != '.DS_Store') {
+						//Convert into webp
+						exec('cwebp [options] -q 75 ./uploads/'+file+' -o ./public/'+file.slice(0, -4)+'.webp', (err, stdout, stderr) => {
+						  if (err) {
+						    console.error(err);
+						    return;
+						  }
+
+							//Creates a new instance of eazyZip
+							var zip = new EasyZip();
+							//Zips the public folder and creates the public.zip
+							zip.zipFolder('./public',function(){
+								zip.writeToFile('public.zip');
+							});
+						});
+					}
+				});
+			}
 		});
-
-	//Read all files from upload/
-	var file = fs.readdirSync('./uploads/', {});
-
-	//Loop trough each file
-	file.forEach( function(file, index) {
-		//Just....
-		if(file != '.DS_Store') {
-			//Convert into webp
-			exec('cwebp [options] -q 75 ./uploads/'+file+' -o ./public/'+file.slice(0, -4)+'.webp', (err, stdout, stderr) => {
-			  if (err) {
-			    console.error(err);
-			    return;
-			  }
-			});
-		}
-	});
-
-	res.send();
-});
-
-//Do zip
-app.post('/zip',function(req,res){
-	//Creates a new instance of eazyZip
-	var zip = new EasyZip();
-	//Zips the public folder and creates the public.zip
-	zip.zipFolder('./public',function(){
-	    zip.writeToFile('public.zip');
-	});
-	res.send();
+		res.send();
 });
 
 //When you ask for the download
