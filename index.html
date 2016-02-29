@@ -1,18 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css">
 	<meta charset="utf-8">
 	<title>Upload Images</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-
-	<h1>Images Upload</h1>
+	<header>
+		<div class="container">
+			<div class="page-title">
+				<h1>Image Optimizer</h1>
+			</div>
+			<div class="text-center">
+				<button type="button" id="optimize" class="btn btn-dark">Optimize</button>
+			</div>
+			
+			<!--
+			<form method = "post" action = "/optimize">
+				<input type="submit" value="Optimize">
+			</form>
+			-->
+ 		</div>
+	</header>
+	<div class="container">
+		<form action="/photos" method="post" class="dropzone" id="my-awesome-dropzone">
+			
+		</form>	
+	</div>
+<!--
+	<header>
+		<p>Upload your images, click on optimize and enjoy using best performance images on your website!</p>
+	</header>
 
 	<form id="uploadForm" enctype="multipart/form-data" action = "/photo" method = "post">
-		<input type="file" name="userPhoto" multiple />
+		<label class="fileContainer">
+		    Click here to trigger the file uploader!
+		    
+		</label>
 		<input type="submit" value="Upload Image" name="submit">
-	</form>
+	</form>	
 
 	<form method = "post" action = "/optimize">
 		<input type="submit" value="Optimize">
@@ -21,5 +47,9 @@
 	<form method = "post" action = "/download">
 		<input type="submit" value="Download">
 	</form>
+-->
+	<script src="js/dropzone.js"></script>
+	<script src="js/script.js"></script>
+	
 </body>
 </html>

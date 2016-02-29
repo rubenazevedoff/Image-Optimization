@@ -1,0 +1,179 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+
+}
+
+body {
+	background-color: #f8f8f8;
+}
+
+.container {
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.text-center {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.page-title {
+	text-align: center;
+	font-size: 2em;
+	padding-bottom: 50px;
+}
+
+.page-title h1 {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
+header {
+	margin-top: 80px;
+	margin-bottom: 30px;
+}
+
+.btn {
+	font-size: 13px;
+	letter-spacing: 0.8px;
+	text-align: center;
+	height: 40px;
+	padding: 5px 20px;
+	border-radius: 40px;
+	cursor: pointer;
+}
+.btn[disabled] {
+	cursor: default;
+}
+
+.btn.btn-light {
+	color: #222;
+	background-color: #f8f8f8;
+	border: 1px solid #eeeeee;
+	transition: all 0.5s ease;
+}
+.btn.btn-light:hover {
+	background-color: #eeeeee;
+	border: 1px solid #dddddd;
+	transition: all 0.5s ease;
+}
+.btn.btn-light[disabled],
+.btn.btn-light:hover[disabled] {
+	color: #999999;
+	background-color: #eeeeee;
+}
+
+.btn.btn-dark {
+	color: #fff;
+	background-color: #222222;
+	border: none;
+	transition: all 0.5s ease;
+}
+.btn.btn-dark:hover {
+	background-color: #555555;
+	transition: all 0.5s ease;
+}
+.btn.btn-dark[disabled],
+.btn.btn-dark:hover[disabled] {
+	background-color: #777777;
+}
+
+
+.dz-default {
+	width: 100%;
+	background-color: #f8f8f8;
+	box-shadow: 2px 2px 2px 0 rgba(228, 224, 224, 0.5);
+	border: solid 1px #eeeeee;
+	font-size: 24px;
+	line-height: 200px;
+	letter-spacing: 0.6px;
+	color: #222222;
+	cursor: pointer;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.dz-preview {
+	background-color: #ffffff;
+	box-shadow: 2px 2px 2px 0 rgba(228, 224, 224, 0.5);
+	position: relative;
+	display: inline-block;
+    width: 200px;
+    margin: 0 5px 5px 0;
+    padding: 10px;
+}
+
+.dz-preview .dz-image {
+	width: 100%;
+}
+
+.dz-preview .dz-image > img {
+	width: 100%;
+}
+
+.dz-preview .dz-details {
+	text-align: center;
+	font-size: 0.8em;
+	margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.dz-preview.dz-processing .dz-progress {
+	position: relative;
+    height: 2px;
+    width: 100%;
+    background-color: #eee;
+    margin-top: 13px;
+}
+
+.dz-preview.dz-processing .dz-upload{
+    position: absolute;
+	height: 2px;
+	background-color: #222;
+}
+
+.dz-preview.dz-complete.dz-error .dz-upload  {
+	background-color: #f55;
+}
+
+.dz-preview.dz-complete.dz-success .dz-upload  {
+	background-color: #1abc9c;
+}
+
+.dz-preview .dz-success-mark,
+.dz-preview .dz-error-mark {
+	visibility: hidden;
+	opacity: 1;
+	position: absolute;
+    left: 82px;
+    top: 42px;
+    transition: none;
+    
+}
+
+.dz-preview.dz-complete.dz-success.dz-image-preview .dz-success-mark,
+.dz-preview.dz-complete.dz-error.dz-image-preview .dz-error-mark {
+    visibility: visible;
+    opacity: 0;
+    top: 35px;
+    left: 82px;
+    transition: all 0.7s ease-in-out;
+}
+
+.dz-preview.dz-complete.dz-success .dz-error-mark,
+.dz-preview.dz-complete.dz-error .dz-success-mark {
+	visibility: hidden;
+}
+
+.dz-preview .dz-error-message {
+	color: #f55;
+    font-size: 0.8em;
+    margin-top: 5px;
+    text-align: center;
+}
+
