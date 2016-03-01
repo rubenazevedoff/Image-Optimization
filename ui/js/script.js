@@ -1,5 +1,6 @@
 var files = [];
 var optimizeBtn = document.getElementById('optimize');
+var previewContainer = document.getElementsByClassName('dz-preview')[0];
 optimizeBtn.addEventListener('click', function () {
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
@@ -24,6 +25,7 @@ optimizeBtn.addEventListener('click', function () {
 override dropzone options
 */
 
+
 Dropzone.options.myAwesomeDropzone = {
 	dictDefaultMessage : 'Click here to browse or drag\'n\'drop the files here',
 	acceptedFiles: 'image/jpeg,image/png',
@@ -32,5 +34,9 @@ Dropzone.options.myAwesomeDropzone = {
 		this.on("addedfile", function(file) { 
 			files.push(file);
 		});
+	},
+	previewTemplate: document.getElementById('myTemplate').innerHTML,
+	successMultiple: function () {
+		console.log('success');
 	}
 };

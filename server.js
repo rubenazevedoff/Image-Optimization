@@ -19,9 +19,7 @@ var storage =  multer.diskStorage({
 });
 
 //We will need to storage and in HTMl we will send an array (array('userPhoto') => Search userPhoto in html)
-var upload = multer({ storage : storage, dest: './uploads', onFileUploadComplete: function (event) {
-	console.log(event);
-}});
+var upload = multer({ storage : storage, dest: './uploads'});
 
 var app = express();
 

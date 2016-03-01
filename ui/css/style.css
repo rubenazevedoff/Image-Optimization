@@ -177,3 +177,24 @@ header {
     text-align: center;
 }
 
+.dz-remove-image {
+	position: absolute;
+	display: none;
+    top: 15px;
+    right: 15px;
+    color: white;
+    background: #222;
+    padding: 13px 10px;
+    line-height: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+.dz-preview.dz-complete.dz-success.dz-image-preview .dz-remove-image {
+   display: block;
+}
+.dz-remove-image:hover {
+	background-color: #555555;
+}
+
