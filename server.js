@@ -120,37 +120,34 @@ app.post('/optimize', function (req, res) {
 	var file = fs.readdirSync('./uploads/', {});
 	var i=0;
 	new Imagemin()
-		.src('./uploads/*.{gif,jpg,png,svg}')
-		.dest('./uploads/')
-		.use(Imagemin.jpegtran({progressive: true}))
-		.run(function (err, files) {
-			if(files.length == file.length) {
+	.src('./uploads/*.{gif,jpg,png,svg}')
+	.dest('./uploads/')
+	.use(Imagemin.jpegtran({progressive: true}))
+	.run(function (err, files) {
+		//Loop trough each file
+		file.forEach( function(file, index) {
+			//Just....
+			if(file != '.DS_Store') {
+				//Convert into webp
+				console.log('converting file ' + file);
+				exec('cwebp [options] -q 75 ./uploads/'+file+' -o ./public/'+file.slice(0, -4)+'.webp', (err, stdout, stderr) => {
+				  if (err) {
+				    console.error(err);
+				    res.status(500).send(err);
+				  }
 
+					//Creates a new instance of eazyZip
+					var zip = new EasyZip();
+					//Zips the public folder and creates the public.zip
+					zip.zipFolder('./public',function(){
+						zip.writeToFile('public.zip');
+					});
 
-				//Loop trough each file
-				file.forEach( function(file, index) {
-					//Just....
-					if(file != '.DS_Store') {
-						//Convert into webp
-						exec('cwebp [options] -q 75 ./uploads/'+file+' -o ./public/'+file.slice(0, -4)+'.webp', (err, stdout, stderr) => {
-						  if (err) {
-						    console.error(err);
-						    return;
-						  }
-
-							//Creates a new instance of eazyZip
-							var zip = new EasyZip();
-							//Zips the public folder and creates the public.zip
-							zip.zipFolder('./public',function(){
-								zip.writeToFile('public.zip');
-							});
-
-						});
-					}
 				});
-				res.send('completed!');
 			}
 		});
+		res.status(200).send('completed!');
+	});
 });
 
 //When you ask for the download
