@@ -54,65 +54,10 @@ app.post('/getImage', function (req, res) {
 	});
 });
 
-//When images are sent
-/*
-app.post('/photos',function(req,res){
-	//We call multer to deal with uploader
-    upload(req,res,function(err) {
-        if(err) {
-            return res.end("Error uploading file.");
-        }
-        res.end("File is uploaded");
-    });
-});
-*/
-
-function optimize() {
-	var file = fs.readdirSync('./uploads/', {});
-	var i=0;
-	new Imagemin()
-		.src('./uploads/*.{gif,jpg,png,svg}')
-		.dest('./uploads/')
-		.use(Imagemin.jpegtran({progressive: true}))
-		.run(function (err, files) {
-			if (err) {
-				console.log(err);
-			}
-			else {
-				if(files && files.length == file.length) {
-
-
-					//Loop trough each file
-					file.forEach( function(file, index) {
-						//Just....
-						if(file != '.DS_Store') {
-							//Convert into webp
-							exec('cwebp [options] -q 75 ./uploads/'+file+' -o ./public/'+file.slice(0, -4)+'.webp', (err, stdout, stderr) => {
-							  if (err) {
-							    console.error(err);
-							    return;
-							  }
-
-								//Creates a new instance of eazyZip
-								var zip = new EasyZip();
-								//Zips the public folder and creates the public.zip
-								zip.zipFolder('./public',function(){
-									zip.writeToFile('public.zip');
-								});
-
-							});
-						}
-					});
-				}
-			}
-		});
-}
 
 app.post('/photos', upload.array('file'), function (req, res, next) {
 	return res.status(200).send(req.file);
 });
-
-
 
 
 app.post('/optimize', function (req, res) {
